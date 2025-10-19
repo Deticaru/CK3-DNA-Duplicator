@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNA Duplicator - Crusader Kings III</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 1000px;
+            padding: 30px;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .info-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+            color: #555;
+        }
+
+        .info-box li {
+            margin: 5px 0;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel h2 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        textarea {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 13px;
+            resize: none;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        #output {
+            background: #f9f9f9;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        .btn-success {
+            background: #4caf50;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧬 DNA Duplicator</h1>
+        <p class="subtitle">Crusader Kings III - Character DNA Duplicator</p>
+
+        <div class="info-box">
+            <h3>How it works:</h3>
+            <ul>
+                <li><strong>Regular genes:</strong> Copies first value to second (A → B)</li>
+                <li><strong>Color genes:</strong> Duplicates values (A1 A2 B1 B2 → A1 A2 A1 A2)</li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div class="panel">
+                <h2>📝 Input DNA</h2>
+                <textarea id="input" placeholder="Paste your DNA code here..."></textarea>
+            </div>
+
+            <div class="panel">
+                <h2>✨ Processed DNA</h2>
+                <textarea id="output" readonly placeholder="Processed DNA will appear here..."></textarea>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button class="btn-secondary" onclick="clearAll()">🗑️ Clear</button>
+            <button class="btn-primary" onclick="processDNA()">⚡ Process DNA</button>
+            <button class="btn-success" onclick="copyToClipboard()" id="copyBtn" disabled>📋 Copy Result</button>
+        </div>
+
+        <div id="status" class="status"></div>
+    </div>
+
+    <script>
+        // Wait for pywebview to be ready
+        window.addEventListener('pywebviewready', function() {
+            document.getElementById('input').placeholder = "Paste your DNA code here and click 'Process DNA'...";
+        });
+
+        async function processDNA() {
+            const input = document.getElementById('input').value.trim();
+            const outputArea = document.getElementById('output');
+            const copyBtn = document.getElementById('copyBtn');
+
+            if (!input) {
+                showStatus('Please enter DNA code first!', 'error');
+                return;
+            }
+
+            // Check if pywebview is available
+            if (!window.pywebview || !window.pywebview.api) {
+                showStatus('Error: Connection to Python backend not ready. Please wait a moment and try again.', 'error');
+                return;
+            }
+
+            try {
+                showStatus('Processing...', 'success');
+                
+                // Call Python function through pywebview API
+                const result = await window.pywebview.api.duplicate_dna(input);
+                
+                if (result.startsWith('Error:')) {
+                    showStatus(result, 'error');
+                    outputArea.value = '';
+                    copyBtn.disabled = true;
+                } else {
+                    outputArea.value = result;
+                    copyBtn.disabled = false;
+                    showStatus('✅ DNA processed successfully!', 'success');
+                }
+            } catch (error) {
+                showStatus('Error: ' + error.message, 'error');
+                console.error('Error processing DNA:', error);
+            }
+        }
+
+        async function copyToClipboard() {
+            const output = document.getElementById('output').value;
+            
+            if (!output) {
+                showStatus('Nothing to copy!', 'error');
+                return;
+            }
+
+            // Check if pywebview is available
+            if (!window.pywebview || !window.pywebview.api) {
+                showStatus('Error: Connection to Python backend not ready.', 'error');
+                return;
+            }
+
+            try {
+                // Call Python function to copy to clipboard
+                const success = await window.pywebview.api.copy_to_clipboard(output);
+                
+                if (success) {
+                    showStatus('✅ Copied to clipboard!', 'success');
+                } else {
+                    showStatus('Failed to copy to clipboard', 'error');
+                }
+            } catch (error) {
+                showStatus('Error: ' + error.message, 'error');
+                console.error('Error copying to clipboard:', error);
+            }
+        }
+
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+            document.getElementById('copyBtn').disabled = true;
+            hideStatus();
+        }
+
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = 'status ' + type + ' show';
+        }
+
+        function hideStatus() {
+            const status = document.getElementById('status');
+            status.className = 'status';
+        }
+
+        // Auto-hide status messages after 3 seconds
+        let statusTimeout;
+        function showStatus(message, type) {
+            clearTimeout(statusTimeout);
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = 'status ' + type + ' show';
+            
+            statusTimeout = setTimeout(() => {
+                hideStatus();
+            }, 3000);
+        }
+
+        // Allow Enter key in textarea without triggering form submission
+        document.getElementById('input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                processDNA();
+            }
+        });
+    </script>
+</body>
+</html>
