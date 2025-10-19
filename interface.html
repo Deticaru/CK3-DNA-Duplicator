@@ -28,7 +28,8 @@
             width: 100%;
             max-width: 1000px;
             padding: 30px;
-            max-height: 90vh;
+            min-height: 800px;
+            max-height: 98vh;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -76,6 +77,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 20px;
             flex: 1;
+            min-height: 500px;
             overflow: hidden;
         }
 
@@ -92,6 +94,7 @@
 
         textarea {
             flex: 1;
+            min-height: 320px;
             padding: 12px;
             border: 2px solid #ddd;
             border-radius: 8px;
@@ -168,12 +171,21 @@
         }
 
         .status {
-            text-align: center;
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 5px;
+            position: fixed;
+            top: 32px;
+            right: 32px;
+            min-width: 260px;
+            max-width: 400px;
+            z-index: 9999;
+            padding: 14px 22px;
+            border-radius: 7px;
             font-weight: 500;
-            display: none;
+            opacity: 0;
+            color: transparent;
+            pointer-events: none;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+            text-align: left;
+            transition: all 0.3s ease-in-out, color 0.4s cubic-bezier(.4,0,.2,1), background 0.7s cubic-bezier(.4,0,.2,1);
         }
 
         .status.success {
@@ -189,7 +201,8 @@
         }
 
         .status.show {
-            display: block;
+            opacity: 1;
+            pointer-events: auto;
         }
 
         @media (max-width: 768px) {
@@ -230,8 +243,9 @@
             <button class="btn-success" onclick="copyToClipboard()" id="copyBtn" disabled>📋 Copy Result</button>
         </div>
 
-        <div id="status" class="status"></div>
+
     </div>
+    <div id="status" class="status"></div>
 
     <script>
         // Wait for pywebview to be ready
@@ -323,17 +337,16 @@
             status.className = 'status';
         }
 
-        // Auto-hide status messages after 3 seconds
+        // Auto-hide status messages after 5 seconds with smooth transition
         let statusTimeout;
         function showStatus(message, type) {
             clearTimeout(statusTimeout);
             const status = document.getElementById('status');
             status.textContent = message;
             status.className = 'status ' + type + ' show';
-            
             statusTimeout = setTimeout(() => {
                 hideStatus();
-            }, 3000);
+            }, 5000);
         }
 
         // Allow Enter key in textarea without triggering form submission

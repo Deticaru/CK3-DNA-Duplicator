@@ -22,14 +22,15 @@ def start_gui():
     api = Api()
     
     # Create the webview window with the HTML file
+    icon_path = os.path.join(current_dir, 'icon.ico')
     window = webview.create_window(
         title='DNA Duplicator - Crusader Kings III',
         url=html_path,
         js_api=api,
-        width=1024,
-        height=768,
+        width=1280,
+        height=900,
         resizable=True,
-        text_select=True
+        text_select=True,
     )
     
     # Start the webview
