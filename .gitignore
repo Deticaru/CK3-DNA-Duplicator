@@ -1,6 +1,6 @@
 functions/__pycache__
-dd_interface.build
-dd_interface.dist
-dd_interface.onefile-build
+dd_gui.build
+dd_gui.dist
+dd_gui.onefile-build
 build-out
-dd_interface.exe
+DNA Duplicator.exe
