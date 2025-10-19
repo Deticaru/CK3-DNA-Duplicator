@@ -27,8 +27,8 @@ def start_gui():
         title='DNA Duplicator - Crusader Kings III',
         url=html_path,
         js_api=api,
-        width=1280,
-        height=900,
+        width=1000,
+        height=700,
         resizable=True,
         text_select=True,
     )
