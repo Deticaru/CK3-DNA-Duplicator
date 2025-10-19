@@ -16,7 +16,7 @@ Windows will think the executable is a threat, you can restore it in the Protect
 ## How to Run
 ### GUI version (interface)
 1. Download `DNA Duplicator.exe` (To build it yourself, see below).
-2. Double-click to launch.
+2. Double-click to launch. (First time launching will take a few more seconds)
 
 ### CLI version (terminal)
 1. Download `dd_cli.py`
@@ -39,7 +39,7 @@ chmod +x dd_cli.py
 ## Building Your Own Executable
 
 ### Requirements
-- Python 3.12
+- Python 3.12 (you can try newer versions, but right now there's no support for libraries.)
 - All dependencies:
 	```powershell
 	pip install -r requirements.txt
@@ -65,4 +65,4 @@ MIT License. See LICENSE file.
 - pywebview, Nuitka, pythonnet
 
 ---
-For issues or suggestions, open an issue on GitHub or contact the author.
+For issues or suggestions, open an issue on GitHub.
