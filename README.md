@@ -2,7 +2,8 @@
 
 A simple desktop tool for duplicating Crusader Kings III character DNA strings.
 
-### Before Continuing
+### If you're using the GUI version
+
 Windows will think the executable is a threat, you can restore it in the Protection History. 
 
 **This is normal**, since this executable doesn't have a certificate, if you're suspicious you can just build it yourself, though it will still detect it as a threat.
@@ -13,8 +14,27 @@ Windows will think the executable is a threat, you can restore it in the Protect
 3. Click Copy Result.
 
 ## How to Run
+### GUI version (interface)
 1. Download `DNA Duplicator.exe` (To build it yourself, see below).
 2. Double-click to launch.
+
+### CLI version (terminal)
+1. Download `dd_cli.py`
+2. Run through a terminal:
+
+**Windows**:
+```
+py dd_cli.py 
+```
+**Linux and MacOS**:
+```
+python3 dd_cli.py
+```
+or **Linux**:
+```
+chmod +x dd_cli.py
+./dd_cli.py
+```
 
 ## Building Your Own Executable
 
