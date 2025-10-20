@@ -8,7 +8,7 @@ Windows will think the executable is a threat, you can restore it in the Protect
 
 **This is normal**, since this executable doesn't have a certificate, if you're suspicious you can just build it yourself, though it will still detect it as a threat, alternatively you can use the CLI version, since it's just a standalone Python file.
 
-## How to use
+## How to use (GUI Version)
 1. Paste Ruler DNA in "Input DNA".
 2. Click Process.
 3. Click Copy Result.
