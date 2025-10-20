@@ -16,12 +16,27 @@ Windows will think the executable is a threat, you can restore it in the Protect
 
 **This is normal**, since this executable doesn't have a certificate, if you're suspicious you can just build it yourself, though it will still detect it as a threat, alternatively you can use the CLI version, since it's just a standalone Python file.
 
-## How to use (GUI Version)
+## How to use 
+### GUI Version
 1. Paste Ruler DNA in "Input DNA".
 2. Click Process.
 3. Click Copy Result.
 
 ![Screenshot](screenshot.png)
+
+### CLI Version
+1. Paste Ruler DNA onto your terminal with 
+
+**Windows**: CTRL+V
+
+**Linux**: CTRL+SHIFT+V
+
+**MacOS**: Cmd+V
+
+2. Write `END` to send your DNA.
+3. Duplicated DNA will be directly sent to your clipboard.
+
+![Screenshot](screenshot_cli.png)
 
 ## How to Run
 ### GUI version (interface)
