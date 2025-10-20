@@ -13,6 +13,8 @@ Windows will think the executable is a threat, you can restore it in the Protect
 2. Click Process.
 3. Click Copy Result.
 
+![Screenshot](screenshot.png)
+
 ## How to Run
 ### GUI version (interface)
 1. Download `DNA Duplicator.exe` (To build it yourself, see below).
