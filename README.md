@@ -6,7 +6,7 @@ In Crusader Kings III, character DNA has two values for each value. For example:
 ```
 height_gene = { your_height base_dna_height }
 ```
-So if you've made your character way too different from the base DNA you've edited, that characters children will either look like the character you've made, but also may look like the base DNA you've edited, which may be way too different from your edited DNA.
+So if you make your character very different from the original base DNA, their children may inherit features from either your edited character or the original base DNA. This means your character’s children could look like your custom version, but they might also resemble the unedited base DNA, which could be very different from your changes.
 
 This fixes it by duplicating your DNA onto both values, so your children will always look like their parents actual appearance.
 
