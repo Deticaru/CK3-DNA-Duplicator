@@ -1,6 +1,14 @@
 # CK3 DNA Duplicator
 
 A simple desktop tool for duplicating Crusader Kings III character DNA strings.
+### Simple Explanation
+In Crusader Kings III, character DNA has two values for each value. For example:
+```
+height_gene = { your_height base_dna_height }
+```
+So if you've made your character way too different from the base DNA you've edited, that characters children will either look like the character you've made, but also may look like the base DNA you've edited, which may be way too different from your edited DNA.
+
+This fixes it by duplicating your DNA onto both values, so your children will always look like their parents actual appearance.
 
 ### If you're using the GUI version
 
