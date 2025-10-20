@@ -174,8 +174,7 @@ def main():
     print()
     print("Instructions:")
     print("1. Paste your complete DNA text below")
-    print("2. When finished pasting, press Ctrl+D (Linux/Mac) or Ctrl+Z+Enter (Windows)")
-    print("   Or alternatively, type 'END' on a new line")
+    print("2. When finished pasting, type 'END' on a new line and press enter")
     print("3. The result will be displayed and copied to clipboard")
     print()
     print("-" * 60)
@@ -212,20 +211,51 @@ def main():
         return
     
     print("✅ Processing successful!")
-    print("\n" + "=" * 60)
-    print("RESULT:")
-    print("=" * 60)
-    print(result)
-    print("=" * 60)
     
-    # Try to copy to clipboard
-    print("\nCopying to clipboard...")
-    if copy_to_clipboard(result):
-        print("✅ Result copied to clipboard successfully!")
-        print("You can paste it directly into your file.")
-    else:
-        print("❌ Could not copy to clipboard.")
-        print("You can manually copy the result above.")
+    # Ask user what they want to do
+    while True:
+        print("\n" + "=" * 60)
+        print("What would you like to do?")
+        print("=" * 60)
+        print("1. Copy to Clipboard")
+        print("2. Show DNA")
+        print("3. Copy and Show DNA")
+        print()
+        choice = input("Enter your choice (1, 2, or 3): ").strip()
+        
+        if choice == "1":
+            # Copy to clipboard only
+            if copy_to_clipboard(result):
+                print("✅ Result copied to clipboard successfully!")
+                print("You can paste it directly into your file.")
+            else:
+                print("❌ Could not copy to clipboard.")
+            break
+        elif choice == "2":
+            # Show DNA only
+            print("\n" + "=" * 60)
+            print("RESULT:")
+            print("=" * 60)
+            print(result)
+            print("=" * 60)
+            break
+        elif choice == "3":
+            # Copy and show DNA
+            print("\n" + "=" * 60)
+            print("RESULT:")
+            print("=" * 60)
+            print(result)
+            print("=" * 60)
+            
+            print("\nCopying to clipboard...")
+            if copy_to_clipboard(result):
+                print("✅ Result copied to clipboard successfully!")
+                print("You can paste it directly into your file.")
+            else:
+                print("❌ Could not copy to clipboard.")
+            break
+        else:
+            print("❌ Invalid choice. Please enter 1, 2, or 3.")
     
     print("\nDone! Press Enter to exit...")
     input()
