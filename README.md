@@ -75,6 +75,13 @@ chmod +x dna_duplicator.py
 	```
 
 ### Build Command
+Best approach is to build it as a folder, since it doesn't get flagged as a threat as much:
+```powershell
+py -3.12 -m nuitka --standalone --lto=no --windows-console-mode=disable --windows-icon-from-ico=icon.ico --include-data-file=interface.html=interface.html dd_gui.py
+```
+This creates a dd_gui.dist folder, inside it it's the .exe file that you need. but if you want to move the .exe you need to move the whole dd_gui.dist folder.
+
+Alternatevely, but gets flagged as a threat, though you can set an exception for it:
 ```powershell
 py -3.12 -m nuitka --onefile --lto=no --windows-console-mode=disable --windows-icon-from-ico=icon.ico --include-data-file=interface.html=interface.html --output-filename="DNA Duplicator.exe" dd_gui.py
 ```
